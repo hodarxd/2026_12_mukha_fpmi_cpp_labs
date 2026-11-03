@@ -44,28 +44,36 @@ bool var_7(double *arr, int length)
             counter++;
         }
     }
-    
+
     if (counter > ((length + 1) / 2))
     {
         std::cout << "Cant solve" << std::endl;
         return false;
     }
 
-    int target_idx = 0;
-    for (int i = 0; i < length; i++)
+   for (int m = 0; m < counter; m++)
     {
-        int num = static_cast<int>(arr[i]);
-        if (num >= 0 && num <= 10)
+        int target_pos = m * 2;
+        
+        int curr_idx = -1;
+        for (int i = target_pos; i < length; i++)
         {
-            int target_pos = target_idx * 2;
-            if (target_pos < i) {
-                double temp = arr[i];
-                for (int k = i; k > target_pos; k--) {
-                    arr[k] = arr[k - 1];
-                }
-                arr[target_pos] = temp;
+            int num = static_cast<int>(arr[i]);
+            if (num >= 0 && num <= 10)
+            {
+                curr_idx = i;
+                break;
             }
-            target_idx++;
+        }
+
+        if (curr_idx != -1 && curr_idx > target_pos)
+        {
+            double temp = arr[curr_idx];
+            for (int k = curr_idx; k > target_pos; k--)
+            {
+                arr[k] = arr[k - 1];
+            }
+            arr[target_pos] = temp;
         }
     }
     return true;
@@ -76,18 +84,19 @@ int main()
     int n;
     std::cout << "Input size of array" << std::endl;
     std::cin >> n;
-    
-    if (n <= 0) {
+
+    if (n <= 0)
+    {
         std::cout << "Invalid size!" << std::endl;
         return 1;
     }
 
     double *arr = new double[n];
-    
+
     std::cout << "How you want input array: 1 - by hands, 2 - random" << std::endl;
     int choise;
     std::cin >> choise;
-    
+
     if (choise == 1)
     {
         input_array(arr, n);

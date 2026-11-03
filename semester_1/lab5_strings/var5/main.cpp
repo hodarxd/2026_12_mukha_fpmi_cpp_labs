@@ -8,7 +8,7 @@ std::vector<std::string> SplitWords(const std::string &s,
 
     std::vector<std::string> words;
 
-    size_t beg_index = 0;
+    std::string::size_type beg_index = 0;
     size_t end_index = s.find_first_of(delimeters);
 
     while (beg_index != std::string::npos)

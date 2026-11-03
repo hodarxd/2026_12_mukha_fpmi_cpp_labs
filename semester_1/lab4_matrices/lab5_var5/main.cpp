@@ -28,7 +28,10 @@ void InputMatrix(int **matrix, int m, int n)
     {
         for (int col = 0; col < n; col++)
         {
-            std::cin >> matrix[row][col];
+            if (!(std::cin >> matrix[row][col])) {
+                DeleteMatrix(matrix, m);
+                std::exit(-1);
+            }
         }
     }
 }
@@ -104,11 +107,15 @@ int main()
     {
     case 1:
         InputMatrix(matrix_a, m,n);
+        break;
     case 2:
         input_matrix_random(matrix_a, m,n);
+        break;
     default:
         std::cout<<"Try 1 or 2"<<std::endl;
     }
+    PrintMatrix(matrix_a, m ,n);
+
     arr_sum(matrix_a, m, n, arr);
     sort_select(arr, idx, m);
     for (int row = 0; row < m; row++)

@@ -3,22 +3,21 @@
 
 const int MAX_SIZE = 1000000;
 
-int input_array(int *arr, int n)
+void input_array(int *arr, int n)
 {
     std::cout << "Input elements of array" << std::endl;
     for (int i = 0; i < n; i++)
     {
         std::cin >> arr[i];
     }
-    return arr[n];
+    // return arr[n];
 }
 
-int input_array_random(int *arr, int n)
+int input_array_random(int *arr, int n, std::mt19937 &gen)
 {
     int a, b;
     std::cout << "Input range from a to b" << std::endl;
     std::cin >> a >> b;
-    std::mt19937 gen(45218965);
     std::uniform_int_distribution<int> dist(a, b);
     for (int i = 0; i < n; i++)
     {
@@ -41,7 +40,7 @@ int var_5(int *arr, int length, int t)
     int count = length - 1;
     for (int i = 0; i < length; i++)
     {
-        if (arr[i] == t)
+        if (abs(arr[i]) == (t))
         {
             arr[i] = 0;
             int y = i;
@@ -63,6 +62,8 @@ int main()
 {
     int n, t;
     int arr[MAX_SIZE];
+    std::mt19937 gen(45218965);
+
     std::cout << "Input size of array and t" << std::endl;
     std::cin >> n >> t;
     std::cout << "How you want input array: 1 - by hands, 2 - random" << std::endl;
@@ -70,11 +71,11 @@ int main()
     std::cin >> choise;
     if (choise == 1)
     {
-        arr[n] = input_array(arr, n);
+        input_array(arr, n);
     }
     else if (choise == 2)
     {
-        arr[n] = input_array_random(arr, n);
+        arr[n] = input_array_random(arr, n, gen);
     }
     else
     {
